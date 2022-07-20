@@ -15,7 +15,7 @@ class TriviaTestCase(unittest.TestCase):
         self.app = create_app()
         self.client = self.app.test_client
         self.database_name = "trivia_test"
-        self.database_path = "postgres://{}/{}".format('localhost:5432', self.database_name)
+        self.database_path = "postgres://{}/{}".format('rapcha','1301','localhost:5432', self.database_name)
         setup_db(self.app, self.database_path)
 
         # binds the app to the current context
@@ -67,7 +67,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "Resource not found")
+        self.assertEqual(data["message"], "not found the given resource")
 
     def test_post_new_question(self):
         post_data = {
@@ -93,7 +93,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "Resource not found")
+        self.assertEqual(data["message"], "not found the given resource")
 
     def test_422_post_new_question(self):
         res = self.client().post('/questions')
@@ -124,7 +124,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "Resource not found")
+        self.assertEqual(data["message"], "not found the given resource")
 
     def test_422_post_paginated_search_questions(self):
         res = self.client().post('/searchQuestions')
@@ -150,7 +150,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "Resource not found")
+        self.assertEqual(data["message"], "not found the given resource")
 
     def test_post_play_quiz(self):
         post_data = {
