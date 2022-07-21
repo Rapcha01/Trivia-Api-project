@@ -101,7 +101,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "unprocessable")
+        self.assertEqual(data["message"], "Unable to load categories. Please try your request again")
 
     def test_post_paginated_search_questions(self):
         post_data = {
@@ -132,7 +132,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "unprocessable")
+        self.assertEqual(data["message"], "Unable to load categories. Please try your request again")
 
     def test_get_paginated_question_by_category(self):
         res = self.client().get('/categories/1/questions?page=1')
@@ -174,7 +174,7 @@ class TriviaTestCase(unittest.TestCase):
 
         self.assertEqual(res.status_code, 422)
         self.assertEqual(data["success"], False)
-        self.assertEqual(data["message"], "unprocessable")
+        self.assertEqual(data["message"], "Unable to load categories. Please try your request again")
 
 
 # Make the tests conveniently executable
