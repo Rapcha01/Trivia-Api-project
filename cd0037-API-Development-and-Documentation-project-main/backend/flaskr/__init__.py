@@ -1,4 +1,5 @@
 import os
+import flask_cors
 from flask import Flask, request, abort, jsonify, json
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -11,9 +12,10 @@ QUESTIONS_PER_PAGE = 10
 def paginate_questions(request, selection):
   page = request.args.get('page', 1, type=int)
   start =  (page - 1) * QUESTIONS_PER_PAGE
+  end= start + 10
 
   questions = [question.format() for question in selection]
-  current_questions = questions[start:end]
+  current_questions = questions[start:end,]
 
   return current_questions
 
@@ -21,15 +23,8 @@ def create_app(test_config=None):
   # create and configure the app
   app = Flask(__name__)
   setup_db(app)
-  
-  '''
-  @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
-  '''
-  cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
-  '''
-  @TODO: Use the after_request decorator to set Access-Control-Allow
-  '''
+  
   @app.after_request
   def after_request(response):
       response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization,true')
